@@ -4,45 +4,64 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-  private Vector2 playerMouseInput;
-  private float xRotation;
-
   public Transform playerCamera;
-  public Rigidbody playerBody;
-  public Vector3 playerMovementInput;
-  public LayerMask floorLayer;
+  public Transform orientation;
   public Transform feet;
 
-  public float sensitivity = 3f;
-  public float movementSpeed = 12f;
-  public float jumpForce = 5f;
+  private Rigidbody rb;
+
+  private float xRotation;
+  private float sensitivity = 50f;
+  private float sensitivityMultiplier = 1f;
+
+  public float jumpForce = 10f;
+  public float movementSpeed = 1300f;
+  public LayerMask whatIsGround;
+
+  void Awake()
+  {
+    rb = GetComponent<Rigidbody>();
+  }
+
+  void Start()
+  {
+    Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
+  }
 
   void Update()
   {
-    playerMovementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-    playerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-    MovePlayer();
-    MovePlayerCamera();
+    Look();
+    Movement();
   }
 
-  private void MovePlayer()
+  void Movement()
   {
-    Vector3 moveVector = transform.TransformDirection(playerMovementInput) * movementSpeed;
-    playerBody.velocity = new Vector3(moveVector.x, playerBody.velocity.y, moveVector.z);
-
+    rb.AddForce(orientation.transform.forward * Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime);
+    rb.AddForce(orientation.transform.right * Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime);
     if (Input.GetKeyDown(KeyCode.Space))
     {
-      if (Physics.CheckSphere(feet.position, 0.1f, floorLayer))
-        playerBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+      if (Physics.CheckSphere(feet.position, 0.1f, whatIsGround))
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
   }
 
-  private void MovePlayerCamera()
+  // this code I just ctrl-c ctrl-v
+  private void Look()
   {
-    xRotation -= playerMouseInput.y * sensitivity;
-    transform.Rotate(0f, playerMouseInput.x * sensitivity, 0f);
-    playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensitivityMultiplier;
+    float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensitivityMultiplier;
+
+    //Find current look rotation
+    Vector3 rot = playerCamera.transform.localRotation.eulerAngles;
+    float desiredX = rot.y + mouseX;
+
+    //Rotate, and also make sure we dont over- or under-rotate.
+    xRotation -= mouseY;
+    xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+    //Perform the rotations
+    playerCamera.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+    orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
   }
 }
