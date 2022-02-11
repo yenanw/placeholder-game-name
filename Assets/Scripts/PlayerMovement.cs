@@ -29,6 +29,14 @@ public class PlayerMovement : MonoBehaviour
   private Vector3 playerScale;
   private Vector3 crouchScale = new Vector3(1, 0.75f, 1);
 
+  // wall run
+  public LayerMask whatIsWall;
+  public float wallRunForce = 3000f; // set initial values for these
+  public float maxWallRunSpeed = 15f;
+  public float maxWallRunCameraTilt = 15f;
+  public float wallRunCameraTilt = 0f;
+  bool isWallRight, isWallLeft, isWallRunning;
+
   // input
   float x, y;
   bool jumping;
@@ -54,7 +62,11 @@ public class PlayerMovement : MonoBehaviour
   {
     UpdateInput();
     Look();
+
+    CheckForWall();
+    WallRunInput();
   }
+
 
   void Movement()
   {
@@ -89,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
     rb.AddForce(orientation.transform.right * x * movementSpeed * Time.deltaTime * multiplier);
   }
 
-  // this code I just ctrl-c ctrl-v
   private void Look()
   {
     float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensitivityMultiplier;
@@ -104,8 +115,19 @@ public class PlayerMovement : MonoBehaviour
     xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
     //Perform the rotations
-    playerCamera.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+    playerCamera.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
     orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+
+    if (Math.Abs(wallRunCameraTilt) < maxWallRunCameraTilt && isWallRunning && isWallRight)
+      wallRunCameraTilt += Time.deltaTime * maxWallRunCameraTilt * 2;
+    if (Math.Abs(wallRunCameraTilt) < maxWallRunCameraTilt && isWallRunning && isWallLeft)
+      wallRunCameraTilt -= Time.deltaTime * maxWallRunCameraTilt * 2;
+
+    //Tilts camera back again
+    if (wallRunCameraTilt > 0 && !isWallRight && !isWallLeft)
+      wallRunCameraTilt -= Time.deltaTime * maxWallRunCameraTilt * 2;
+    if (wallRunCameraTilt < 0 && !isWallRight && !isWallLeft)
+      wallRunCameraTilt += Time.deltaTime * maxWallRunCameraTilt * 2;
   }
 
   private void UpdateInput()
@@ -130,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
       // this causes super-jump if the user times the uncrouch and jump correctly
       transform.position = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
     }
-
   }
 
   private Vector2 FindVelRelativeToLook()
@@ -174,5 +195,43 @@ public class PlayerMovement : MonoBehaviour
   private bool isGrounded()
   {
     return Physics.CheckSphere(feet.position, 0.1f, whatIsGround);
+  }
+
+  private void CheckForWall()
+  {
+    isWallRight = !isGrounded() && Physics.Raycast(transform.position, orientation.right, 1f, whatIsWall);
+    isWallLeft = !isGrounded() && Physics.Raycast(transform.position, -orientation.right, 1f, whatIsWall);
+
+    if (!isWallRight && !isWallLeft)
+      StopWallRun();
+  }
+
+  private void WallRunInput()
+  {
+    if ((Input.GetKey(KeyCode.D) && isWallRight) || (Input.GetKey(KeyCode.A) && isWallLeft))
+      StartWallRun();
+  }
+
+  private void StartWallRun()
+  {
+    rb.useGravity = false;
+    isWallRunning = true;
+
+    if (rb.velocity.magnitude <= maxWallRunSpeed)
+    {
+      rb.AddForce(orientation.forward * wallRunForce * Time.deltaTime);
+
+      // stick to the wall
+      if (isWallRight)
+        rb.AddForce(orientation.right * wallRunForce / 5 * Time.deltaTime);
+      else
+        rb.AddForce(-orientation.right * wallRunForce / 5 * Time.deltaTime);
+    }
+  }
+
+  private void StopWallRun()
+  {
+    rb.useGravity = true;
+    isWallRunning = false;
   }
 }
