@@ -1245,11 +1245,14 @@ MonoBehaviour:
   playerCamera: {fileID: 484327659}
   orientation: {fileID: 56532907}
   feet: {fileID: 1434194435}
-  jumpForce: 10
-  movementSpeed: 1300
+  jumpForce: 550
+  movementSpeed: 3500
+  maxSpeed: 20
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  grounded: 0
+  counterMovement: 0.175
 --- !u!1 &1434194434
 GameObject:
   m_ObjectHideFlags: 0
