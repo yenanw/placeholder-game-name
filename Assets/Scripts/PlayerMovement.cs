@@ -30,13 +30,12 @@ public class PlayerMovement : MonoBehaviour
   private Vector3 crouchScale = new Vector3(1, 0.75f, 1);
 
   // wall run
-  // TODO: Add force that pulls player down when wall-running and wall jump
-  public LayerMask whatIsWall;
-  public float wallRunForce = 3000f; // set initial values for these
-  public float maxWallRunSpeed = 15f;
-  public float maxWallRunCameraTilt = 15f;
+  public LayerMask whatIsWall; // currently same as ground
+  public float wallRunForce = 3250f;
+  public float maxWallRunSpeed = 17f;
+  public float maxWallRunCameraTilt = 12f;
   public float wallRunCameraTilt = 0f;
-  public float wallRunGravity = 1000f;
+  public float wallRunGravity = 2000f;
   bool isWallRight, isWallLeft, isWallRunning;
 
   // input
@@ -70,17 +69,14 @@ public class PlayerMovement : MonoBehaviour
   }
 
 
-  void Movement()
+  private void Movement()
   {
     Vector2 mag = FindVelRelativeToLook();
     float xMag = mag.x, yMag = mag.y;
 
     CounterMovement(x, y, mag);
 
-    if (jumping && isGrounded())
-    {
-      rb.AddForce(Vector2.up * jumpForce * 1.5f);
-    }
+    Jump();
 
     //If speed is larger than maxspeed, cancel out the input so you don't go over max speed
     if (x > 0 && xMag > maxSpeed) x = 0;
@@ -101,6 +97,29 @@ public class PlayerMovement : MonoBehaviour
     //Apply forces to move player
     rb.AddForce(orientation.transform.forward * y * movementSpeed * Time.deltaTime * multiplier * multiplierV);
     rb.AddForce(orientation.transform.right * x * movementSpeed * Time.deltaTime * multiplier);
+
+    // limit vertical max speed
+    float verticalVelocity = rb.velocity.y;
+    float newY = verticalVelocity > maxSpeed ? verticalVelocity * 0.8f : verticalVelocity;
+    rb.velocity = new Vector3(rb.velocity.x, newY, rb.velocity.z);
+  }
+
+  private void Jump()
+  {
+    if (jumping && isGrounded())
+    {
+      rb.AddForce(Vector2.up * jumpForce * 1.5f);
+    }
+    else if (!isGrounded() && jumping && isWallRunning)
+    {
+      if (isWallLeft && Input.GetKey(KeyCode.A)) rb.AddForce(orientation.right * jumpForce * 0.75f);
+      else if (isWallRight && Input.GetKey(KeyCode.D)) rb.AddForce(-orientation.right * jumpForce * 0.75f);
+      else return; // otherwise there is a bug where the player can rocket jump with the wall...
+
+      //Always add forward force
+      rb.AddForce(orientation.forward * jumpForce * 0.25f);
+      rb.AddForce(Vector2.up * jumpForce * 0.5f);
+    }
   }
 
   private void Look()

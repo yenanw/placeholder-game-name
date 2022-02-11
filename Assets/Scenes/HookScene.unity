@@ -1257,13 +1257,12 @@ MonoBehaviour:
   counterMovement: 0.175
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8
   wallRunForce: 3000
-  maxWallRunTime: 0
   maxWallRunSpeed: 15
-  maxWallRunCameraTilt: 25
+  maxWallRunCameraTilt: 15
   wallRunCameraTilt: 0
-  wallRunGravity: 200
+  wallRunGravity: 2000
 --- !u!1 &1417502708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1275,7 @@ GameObject:
   - component: {fileID: 1417502712}
   - component: {fileID: 1417502711}
   - component: {fileID: 1417502710}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1291,8 +1290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417502708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.21, y: 8.74, z: -5.79}
-  m_LocalScale: {x: 36.382305, y: 34.436295, z: 0.9643244}
+  m_LocalPosition: {x: 94.6, y: 8.74, z: -5.24}
+  m_LocalScale: {x: 127.27622, y: 34.436295, z: 0.9643244}
   m_Children: []
   m_Father: {fileID: 696898192}
   m_RootOrder: 5
@@ -1496,7 +1495,7 @@ GameObject:
   - component: {fileID: 1848069875}
   - component: {fileID: 1848069874}
   - component: {fileID: 1848069873}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1621,7 +1620,7 @@ GameObject:
   - component: {fileID: 2111143362}
   - component: {fileID: 2111143361}
   - component: {fileID: 2111143360}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1636,8 +1635,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111143358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.12, y: -3.92, z: -11.31}
-  m_LocalScale: {x: 36.382305, y: 5.7393827, z: 0.9643244}
+  m_LocalPosition: {x: 68.75, y: 2.7, z: -11.31}
+  m_LocalScale: {x: 80.08712, y: 22.957531, z: 0.9643244}
   m_Children: []
   m_Father: {fileID: 696898192}
   m_RootOrder: 4
