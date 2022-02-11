@@ -30,11 +30,13 @@ public class PlayerMovement : MonoBehaviour
   private Vector3 crouchScale = new Vector3(1, 0.75f, 1);
 
   // wall run
+  // TODO: Add force that pulls player down when wall-running and wall jump
   public LayerMask whatIsWall;
   public float wallRunForce = 3000f; // set initial values for these
   public float maxWallRunSpeed = 15f;
   public float maxWallRunCameraTilt = 15f;
   public float wallRunCameraTilt = 0f;
+  public float wallRunGravity = 1000f;
   bool isWallRight, isWallLeft, isWallRunning;
 
   // input
@@ -220,6 +222,7 @@ public class PlayerMovement : MonoBehaviour
     if (rb.velocity.magnitude <= maxWallRunSpeed)
     {
       rb.AddForce(orientation.forward * wallRunForce * Time.deltaTime);
+      rb.AddForce(Vector3.down * wallRunGravity * Time.deltaTime);
 
       // stick to the wall
       if (isWallRight)
