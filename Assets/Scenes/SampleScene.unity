@@ -857,8 +857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a898475d530e6c49821e0615ac44c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 200
-  playerBody: {fileID: 1649943491}
 --- !u!4 &1059255041
 Transform:
   m_ObjectHideFlags: 0
@@ -2113,7 +2111,7 @@ Animator:
   m_GameObject: {fileID: 1059417921}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5a35c5f0a89b9654d897ccd7c8f81bd0, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fc9c3d74926e89645908b0b4cc1055ff, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2370,19 +2368,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059417921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08559bf7e0471d64780c5efaa6f0b17d, type: 3}
+  m_Script: {fileID: 11500000, guid: d03223cc42fff124cb5d20ed062ca803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1275079651}
-  sightRange: 10
-  attackRange: 2
-  walkPointRange: 10
-  groundMask:
+  Target: {fileID: 1421456255}
+  GroundMask:
     serializedVersion: 2
     m_Bits: 8
-  playerMask:
+  TargetMask:
     serializedVersion: 2
     m_Bits: 64
+  SightRange: 20
+  AttackRange: 4
+  WalkRange: 20
+  RotateSpeed: 6
+  RunSpeed: 6
+  WalkSpeed: 2.5
 --- !u!195 &1275079651
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2729,9 +2730,19 @@ MonoBehaviour:
   feet: {fileID: 0}
   jumpForce: 5
   movementSpeed: 12
+  maxSpeed: 20
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
+  counterMovement: 0.175
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  wallRunForce: 3250
+  maxWallRunSpeed: 17
+  maxWallRunCameraTilt: 12
+  wallRunCameraTilt: 0
+  wallRunGravity: 2000
 --- !u!114 &1649943493
 MonoBehaviour:
   m_ObjectHideFlags: 0
