@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
   public float counterMovement = 0.175f;
   private float threshold = 0.01f;
 
+  // crouching
+  private Vector3 playerScale;
+  private Vector3 crouchScale = new Vector3(1, 0.75f, 1);
+
   // input
   float x, y;
   bool jumping;
@@ -36,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
   void Start()
   {
+    playerScale = transform.localScale;
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
   }
@@ -108,6 +113,24 @@ public class PlayerMovement : MonoBehaviour
     x = Input.GetAxisRaw("Horizontal");
     y = Input.GetAxisRaw("Vertical");
     jumping = Input.GetButton("Jump");
+
+    Crouch();
+  }
+
+  private void Crouch()
+  {
+    if (Input.GetKeyDown(KeyCode.LeftControl))
+    {
+      transform.localScale = crouchScale;
+      transform.position = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z);
+    }
+    else if (Input.GetKeyUp(KeyCode.LeftControl))
+    {
+      transform.localScale = playerScale;
+      // this causes super-jump if the user times the uncrouch and jump correctly
+      transform.position = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
+    }
+
   }
 
   private Vector2 FindVelRelativeToLook()
