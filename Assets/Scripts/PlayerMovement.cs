@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
   // input
   float x, y;
-  bool jumping;
+  bool jumping, crouching;
 
   void Awake()
   {
@@ -164,11 +164,13 @@ public class PlayerMovement : MonoBehaviour
   {
     if (Input.GetKeyDown(KeyCode.LeftControl))
     {
+      crouching = true;
       transform.localScale = crouchScale;
       transform.position = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z);
     }
     else if (Input.GetKeyUp(KeyCode.LeftControl))
     {
+      crouching = false;
       transform.localScale = playerScale;
       // this causes super-jump if the user times the uncrouch and jump correctly
       transform.position = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
@@ -217,6 +219,8 @@ public class PlayerMovement : MonoBehaviour
   {
     return Physics.CheckSphere(feet.position, 0.1f, whatIsGround);
   }
+
+  public bool isCrouching() { return crouching; }
 
   private void CheckForWall()
   {
