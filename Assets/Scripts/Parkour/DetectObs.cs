@@ -2,60 +2,59 @@ using UnityEngine;
 
 public class DetectObs : MonoBehaviour
 {
-  public string ObjectTagName = "";
-  public bool Obstruction;
-  public GameObject Object;
-  private Collider colnow;
+  public string objectTagname = "";
+  public bool obstruction;
+  public GameObject obj;
+  private Collider currentCollider;
 
   void OnTriggerStay(Collider col)
   {
-
-    if (ObjectTagName != "" && !Obstruction)
+    if (objectTagname != "" && !obstruction)
     {
       if (col.GetComponent<CustomTag>())
       {
-        if (col.GetComponent<CustomTag>().IsEnabled)
+        if (col.GetComponent<CustomTag>().isEnabled)
         {
-          if (col != null && !col.isTrigger && col.GetComponent<CustomTag>().HasTag(ObjectTagName)) // checks if the object has the right tag
+          if (col != null && !col.isTrigger && col.GetComponent<CustomTag>().HasTag(objectTagname)) // checks if the object has the right tag
           {
-            Obstruction = true;
-            Object = col.gameObject;
-            colnow = col;
+            obstruction = true;
+            obj = col.gameObject;
+            currentCollider = col;
           }
         }
       }
     }
 
-    if (ObjectTagName == "" && !Obstruction)
+    if (objectTagname == "" && !obstruction)
     {
       if (col != null && !col.isTrigger)
       {
-        Obstruction = true;
-        colnow = col;
+        obstruction = true;
+        currentCollider = col;
       }
     }
   }
 
   private void Update()
   {
-    if (Object == null || !colnow.enabled)
+    if (obj == null || !currentCollider.enabled)
     {
-      Obstruction = false;
+      obstruction = false;
     }
-    if (Object != null)
+    if (obj != null)
     {
-      if (!Object.activeInHierarchy)
+      if (!obj.activeInHierarchy)
       {
-        Obstruction = false;
+        obstruction = false;
       }
     }
   }
 
   void OnTriggerExit(Collider col)
   {
-    if (col == colnow)
+    if (col == currentCollider)
     {
-      Obstruction = false;
+      obstruction = false;
     }
   }
 }

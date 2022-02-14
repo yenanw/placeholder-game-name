@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class CustomTag : MonoBehaviour
 {
-  public bool IsEnabled = true;
+  public bool isEnabled = true;
 
   private void Start() { }
 

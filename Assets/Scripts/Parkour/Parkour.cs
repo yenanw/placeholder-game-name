@@ -24,18 +24,16 @@ public class Parkour : MonoBehaviour
   private Vector3 startPosition;
 
   private Rigidbody rb;
-  private PlayerMovement pm;
 
   void Start()
   {
     rb = GetComponent<Rigidbody>();
-    pm = GetComponent<PlayerMovement>();
   }
 
   void Update()
   {
-    if (detectVaultObject.Obstruction && !detectVaultObstruction.Obstruction && !canVault
-        && !isParkour && (Input.GetButtonDown("Jump")) && !pm.isCrouching())
+    if (detectVaultObject.obstruction && !detectVaultObstruction.obstruction && !canVault
+        && !isParkour && (Input.GetButtonDown("Jump")))
     {
       canVault = true;
     }
@@ -52,8 +50,8 @@ public class Parkour : MonoBehaviour
       // add animation
     }
 
-    if (detectClimbObject.Obstruction && !detectClimbObstruction.Obstruction && !canClimb
-        && !isParkour && (Input.GetButtonDown("Jump")) && !pm.isCrouching())
+    if (detectClimbObject.obstruction && !detectClimbObstruction.obstruction && !canClimb
+        && !isParkour && (Input.GetButtonDown("Jump")))
     {
       canClimb = true;
     }
