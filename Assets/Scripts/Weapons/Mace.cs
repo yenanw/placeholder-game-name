@@ -4,27 +4,39 @@ using UnityEngine;
 
 public class Mace : MonoBehaviour
 {
+    public Animator animator;
+    public int Damage;
 
-    
-    public int damage;
+    private HashSet<IDamageable> _hitEnemies = new HashSet<IDamageable>();
 
-    private Animator animator;
-    
-    void Start()
+    private static readonly int s_attack = Animator.StringToHash("Base_Attack");
+
+    private void OnTriggerEnter(Collider col)
     {
-        animator = GetComponent<Animator>();
+        if (col.tag == "Enemy")
+        {
+            var enem = col.GetComponent<IDamageable>();
+            if (_hitEnemies.Contains(enem))
+                return;
+
+            enem.Damage(Damage);
+            _hitEnemies.Add(enem);
+        }
     }
 
     public void Attack()
     {
-        animator.SetTrigger("Base_Attack");
+        StartCoroutine(WaitForAttackFinish());
     }
 
-    void OnTriggerEnter(Collider col)
+    public void ResetAttacked() => _hitEnemies.Clear();
+
+    private IEnumerator WaitForAttackFinish()
     {
-        if (col.tag == "Enemy")
-        {
-            Destroy(col.gameObject);
-        }
+        animator.SetTrigger(s_attack);
+
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
+
+        ResetAttacked();
     }
 }
