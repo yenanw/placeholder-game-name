@@ -1,40 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHandler : MonoBehaviour
+public class PlayerHandler : MonoBehaviour, IDamageable
 {
-
-    public float maxHealth = 100f;
-
-    private float currentHealth;
-
     public HealthBar healthBar;
+
+    public float MaxHealth = 100f;
+    public float Health { get; set; }
 
     // Start is called before the first frame update
     public void Start()
     {
-        currentHealth = maxHealth;
-        healthBar.SetUp(maxHealth);
+        Health = MaxHealth;
+        healthBar.SetUp(MaxHealth);
     }
 
     public void Damage(float dmg)
     {
-        currentHealth -= dmg;
+        Health -= dmg;
 
-        if (currentHealth < 0)
-            currentHealth = 0;
+        if (Health < 0)
+        {
+            Health = 0;
+            Die();
+        }
 
-        healthBar.SetHealth(currentHealth);
+        healthBar.SetHealth(Health);
     }
 
     public void Heal(float heal)
     {
-        currentHealth += heal;
+        Health += heal;
 
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        if (Health > MaxHealth)
+            Health = MaxHealth;
 
-        healthBar.SetHealth(currentHealth);
+        healthBar.SetHealth(Health);
+    }
+
+    public void Die()
+    {
+        Debug.Log("You thought I was dead but you just activated my trap card!");
+        Heal(100);
     }
 }
