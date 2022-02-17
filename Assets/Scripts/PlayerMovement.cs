@@ -218,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
     return Physics.CheckSphere(feet.position, 0.1f, whatIsGround);
   }
 
+
   private void CheckForWall()
   {
     isWallRight = !isGrounded() && Physics.Raycast(transform.position, orientation.right, 1f, whatIsWall);
