@@ -15,6 +15,7 @@ namespace Skeleton
         public float RotateSpeed;
         public float RunSpeed, WalkSpeed;
         
+        public HealthBar HealthBar;
         public float Health { get; set; }
 
         private NavMeshAgent _agent;
@@ -70,6 +71,7 @@ namespace Skeleton
 
             // other init
             Health = 100f;
+            HealthBar.SetUp(Health);
         }
 
 
@@ -85,9 +87,9 @@ namespace Skeleton
 
         public void Damage(float dmg)
         {
-            Debug.Log("Skeleton got hit by: " + dmg + " damage!");
             Health -= dmg;
             _isDamaged = true;
+            HealthBar.SetHealth(Health);
         }
 
         public void Die()
