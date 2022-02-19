@@ -5,11 +5,17 @@ using UnityEngine;
 public class Mace : MonoBehaviour
 {
     public Animator animator;
-    public int Damage;
+    public AttackManager attackManager;
 
+    private Transform _hitEffectSpawn;
     private HashSet<IDamageable> _hitEnemies = new HashSet<IDamageable>();
 
     private static readonly int s_attack = Animator.StringToHash("Base_Attack");
+
+    private void Awake()
+    {
+        _hitEffectSpawn = transform.Find("HitEffectSpawn").transform;
+    }
 
     private void OnTriggerEnter(Collider col)
     {
@@ -19,7 +25,7 @@ public class Mace : MonoBehaviour
             if (_hitEnemies.Contains(enem))
                 return;
 
-            enem.Damage(Damage);
+            attackManager.Hit(enem, _hitEffectSpawn);
             _hitEnemies.Add(enem);
         }
     }

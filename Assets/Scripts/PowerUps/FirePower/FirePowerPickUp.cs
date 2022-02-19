@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class FirePowerPickUp : MonoBehaviour, Interactable
 {
-    public Tooltip Tooltip;
-    public GameObject PickUpEffect;
+    public Tooltip tooltip;
+    public GameObject pickUpEffect;
+    public GameObject fireHitEffect;
+    public AttackManager attackManager;
 
     private FirePower _firePower;
 
@@ -13,22 +15,22 @@ public class FirePowerPickUp : MonoBehaviour, Interactable
 
     private void Awake()
     {
-        _firePower = new FirePower();
+        _firePower = new FirePower(fireHitEffect, attackManager);
     }
 
     public void OnCursorEnter()
     {
-        Tooltip.ShowTooltip(s_name + "\n" + s_desc + "\n\n" + s_redText + "\n\n<color=#DDDDDD><size=60%>Press [F] to pick up");
+        tooltip.ShowTooltip(s_name + "\n" + s_desc + "\n\n" + s_redText + "\n\n<color=#DDDDDD><size=60%>Press [F] to pick up");
     }
 
     public void OnCursorExit()
     {
-        Tooltip.HideTooltip();
+        tooltip.HideTooltip();
     }
 
     public void Select()
     {
-        var effect = Instantiate(PickUpEffect, transform.position, transform.rotation);
+        var effect = Instantiate(pickUpEffect, transform.position, transform.rotation);
 
         _firePower.OnEquip();
 

@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface ICombatPower : IPower
 {
-    void OnHit();
+    float Hit(float damage, Vector3 hitLocation);
 }
