@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 622223247}
   - component: {fileID: 622223246}
   - component: {fileID: 622223245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BigPower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
