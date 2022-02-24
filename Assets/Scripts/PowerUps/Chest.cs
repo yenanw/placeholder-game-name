@@ -5,6 +5,7 @@ public class Chest : MonoBehaviour, Interactable
 {
     public Tooltip tooltip;
     public Animator chestAnimator;
+    public GameObject openingEffect;
     public List<GameObject> powerUps;
 
     private static readonly int s_open = Animator.StringToHash("OpenChest");
@@ -27,10 +28,13 @@ public class Chest : MonoBehaviour, Interactable
         // set the layer to default so that the selection raytrace doesn't hit it
         gameObject.layer = 0;
 
+
         // CLOSE YOUR EYES, DON'T LOOK!
         var childLoot = transform.Find("ChestV1").transform.Find("ChestV1_Lock");
         var spawn = Instantiate(randomPowerUp(), childLoot.position + new Vector3(0.3f, 1f, 0), childLoot.rotation);
         spawn.SetActive(true);
+        
+        Instantiate(openingEffect, childLoot.position, childLoot.rotation);
 
         OnCursorExit();
     }

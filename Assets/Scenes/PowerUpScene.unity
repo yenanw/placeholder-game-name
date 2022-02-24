@@ -293,6 +293,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3303535148828513331, guid: 389145416c3991c4fa052f7911e54332, type: 3}
+--- !u!1 &206253829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8560318245411461896, guid: 01b4d6f6aa8262942bac663bdccd0dff, type: 3}
+  m_PrefabInstance: {fileID: 8560318245482050573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &277580403
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +730,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &622223244 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4095466981099551757, guid: 4fdf083cc87488149a01ce838637866f, type: 3}
+  m_PrefabInstance: {fileID: 4095466981553202049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &663795431 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1925566238816766676, guid: be159221c1f99f343841991f6b6d4479, type: 3}
@@ -984,7 +994,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltip: {fileID: 663795432}
   chestAnimator: {fileID: 402255072}
-  powerUps: []
+  openingEffect: {fileID: 1599718021928974, guid: 21461e6c060baf044ac3e717ed4170cb, type: 3}
+  powerUps:
+  - {fileID: 622223244}
+  - {fileID: 206253829}
 --- !u!1 &762243246
 GameObject:
   m_ObjectHideFlags: 0
