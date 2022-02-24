@@ -14,6 +14,8 @@ public class SelectionManager : MonoBehaviour
 
     void Update()
     {
+        // OH YEAH, the pick up is hard-coded btw lmao
+        // TODO: fix it but probably never...
         if (_current != null && Input.GetKeyDown(KeyCode.F))
         {
             _current.Select();
