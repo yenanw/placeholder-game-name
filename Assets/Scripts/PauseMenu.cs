@@ -46,6 +46,13 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
+    public void Death()
+    {
+        Pause();
+        pauseMenuUI.transform.Find("Resume Button").gameObject.SetActive(false);
+        pauseMenuUI.transform.Find("Death Text").gameObject.SetActive(true);
+    }
+
     public void LoadMenu()
     {
         Time.timeScale = 1f;
