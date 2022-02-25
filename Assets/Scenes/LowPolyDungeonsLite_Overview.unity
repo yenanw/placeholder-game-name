@@ -2452,7 +2452,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh142462
+  m_Name: pb_Mesh177132
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4833,7 +4833,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh141250
+  m_Name: pb_Mesh175920
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27765,17 +27765,33 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 18620209}
+    - target: {fileID: 6867430581539634743, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -323.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6867430582543470002, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
       propertyPath: m_text
       value: RETURN TO MENU
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867430582849767832, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6867430582849767834, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 18620209}
+    - target: {fileID: 6867430582849767835, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 153.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6867430582940077464, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
       propertyPath: m_Name
       value: Pause Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867430582940077464, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6867430582940077467, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
       propertyPath: m_Pivot.x
@@ -27865,6 +27881,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 18620209}
+    - target: {fileID: 6867430583432057482, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
 --- !u!1001 &7201359802210935186
