@@ -12,7 +12,7 @@ public class GrapplingHook : MonoBehaviour
     public new Transform camera;
     public Transform player;
 
-    private float maxDistance = 100f;
+    private float maxDistance = 20f;
     private SpringJoint joint;
 
     void Awake()
@@ -62,7 +62,7 @@ public class GrapplingHook : MonoBehaviour
         }
     }
 
-    void StopGrapple()
+    public void StopGrapple()
     {
         lr.positionCount = 0;
         Destroy(joint);

@@ -2452,7 +2452,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19108
+  m_Name: pb_Mesh142462
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3763,6 +3763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportReference: {fileID: 1141954746}
+  grapplingHook: {fileID: 1038163964}
 --- !u!64 &253912730
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4832,7 +4833,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17848
+  m_Name: pb_Mesh141250
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22171,6 +22172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportReference: {fileID: 2073921921}
+  grapplingHook: {fileID: 1038163964}
 --- !u!64 &1754969899
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27763,6 +27765,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 18620209}
+    - target: {fileID: 6867430582543470002, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
+      propertyPath: m_text
+      value: RETURN TO MENU
+      objectReference: {fileID: 0}
     - target: {fileID: 6867430582849767834, guid: d4a1b02e117a13642877fd993e36d26a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
