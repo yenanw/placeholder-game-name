@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHandler : MonoBehaviour, IDamageable
 {
     public HealthBar healthBar;
+    public PauseMenu pauseMenu;
 
     public float MaxHealth = 100f;
     public float Health { get; set; }
@@ -39,7 +40,6 @@ public class PlayerHandler : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        Debug.Log("You thought I was dead but you just activated my trap card!");
-        Heal(100);
+        pauseMenu.Death();
     }
 }
